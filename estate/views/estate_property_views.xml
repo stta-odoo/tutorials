@@ -28,9 +28,12 @@
         <field name="arch" type="xml">
             <form string="Estate Property Form">
                 <sheet>
-                    <div class="h1">
-                        <field name="name"></field>
-                    </div>
+                    <group>
+                        <div class="h1">
+                            <field name="name"></field>
+                        </div>
+                        <fieldname="property_tag_id"></field>
+                    </group>
                     <group>
                         <group>
                             <field name="postcode"></field>
@@ -55,6 +58,12 @@
                                 <field name="garden"></field>
                                 <field name="garden_area"></field>
                                 <field name="garden_orientation"></field>
+                            </group>
+                        </page>
+                        <page string="Other Info">
+                            <group>
+                                <field name="buyer_id"></field>
+                                <field name="salesperson_id"></field>
                             </group>
                         </page>
                     </notebook>
