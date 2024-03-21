@@ -1,7 +1,9 @@
 from odoo import api, fields, models
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
+from odoo.tools import float_utils
 
 class Property(models.Model):
+
     _name = "estate.property"
     _description = "Properties of an estate"
     name = fields.Char(string="Title", required=True)
@@ -28,11 +30,6 @@ class Property(models.Model):
         string = "Satatus",
     )
 
-    # customer - many2one
-    # agent - many2one
-    # property type - m2o
-    # list of tags - m2m
-    # list of offers received - o2m
     property_type_id = fields.Many2one("estate.property.type", string="Property Type")
     
     buyer_id = fields.Many2one("res.partner", string="Buyer", copy=False, readonly=True)
@@ -45,6 +42,11 @@ class Property(models.Model):
     total_area = fields.Integer(compute="_compute_total_area")
     best_price = fields.Float(compute="_compute_best_price")
     
+    _sql_constraints = [
+        ('check_selling_price', 'CHECK(selling_price >= 0)', 'Selling price must not be negative.'),
+        ('check_expected_price', 'CHECK(expected_price > 0)', 'Expected price must not be negative.'),
+    ]
+
     @api.depends("living_area", "garden_area")
     def _compute_total_area(self):
         for record in self:
@@ -77,3 +79,10 @@ class Property(models.Model):
                 raise UserError(("Canceled property cannot be sold."))
             record.state = "canceled"
         return True
+
+    @api.constrains("selling_price", "expected_price")
+    def _check_selling_price(self):
+        _precision_rounding = self.env["decimal.precision"].precision_get("Account")
+        for record in self:
+            if not float_utils.float_is_zero(record.selling_price, _precision_rounding) and float_utils.float_compare(record.selling_price, 0.9*record.expected_price, _precision_rounding) == -1:
+                raise ValidationError("Selling price cannot be lower than 0.9x of the expected price") 
