@@ -37,10 +37,10 @@
                         <field name="name"></field>
                     </div>
                     <group>
-                        <field name="property_tag_ids" widget="many2many_tags"/>
+                        <field name="property_tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                         <group>
                             <!-- <field name="state"></field> -->
-                            <field name="property_type_id"></field>
+                            <field name="property_type_id" options="{'no_create': true}"></field>
                             <field name="postcode"></field>
                             <field name="date_availability"></field>                        
                         </group>
