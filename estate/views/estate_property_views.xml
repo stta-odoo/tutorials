@@ -50,10 +50,10 @@
                                 <field name="state"></field>
                                 <field name="description"></field>
                                 <field name="bedrooms"></field>
+                                <field name="total_area"></field>
                                 <field name="living_area"></field>
                                 <field name="facades"></field>
                                 <field name="garage"></field>
-                                <field name="garden"></field>
                                 <field name="garden_area"></field>
                                 <field name="garden_orientation"></field>
                             </group>
