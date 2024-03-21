@@ -25,9 +25,12 @@
         <field name="arch" type="xml">
             <tree string="Test">
                 <field name="price"></field>
-                <field name="status"></field>
                 <field name="buyer_id"></field>
                 <field name="validity"></field>
+                <button name="action_accept" type="object" icon="fa-check"/>
+                <button name="action_refuse" type="object" icon="fa-times"/>
+                <button name="action_cancel" type="object" icon="fa-undo"/>
+                <field name="status"></field>
                 <field name="date_deadline"></field>
             </tree>
         </field>

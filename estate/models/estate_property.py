@@ -1,4 +1,5 @@
 from odoo import api, fields, models
+from odoo.exceptions import UserError
 
 class Property(models.Model):
     _name = "estate.property"
@@ -24,6 +25,7 @@ class Property(models.Model):
         required = True,
         default = "new",
         copy = False,
+        string = "Satatus",
     )
 
     # customer - many2one
@@ -33,7 +35,7 @@ class Property(models.Model):
     # list of offers received - o2m
     property_type_id = fields.Many2one("estate.property.type", string="Property Type")
     
-    buyer_id = fields.Many2one("res.partner", string="Buyer", copy=False)
+    buyer_id = fields.Many2one("res.partner", string="Buyer", copy=False, readonly=True)
     salesperson_id = fields.Many2one("res.users", string="Salesperson", default=lambda self: self.env.user)
 
     property_tag_ids = fields.Many2many("estate.property.tag", string="Property Tags")
@@ -61,3 +63,17 @@ class Property(models.Model):
         else:
             self.garden_area = 0
             self.garden_orientation = False
+
+    def action_sold_click(self):
+        for record in self:
+            if record.state == "canceled":
+                raise UserError(("Sold property cannot be canceled."))
+            record.state = "sold"
+        return True
+    
+    def action_cancel_click(self):
+        for record in self:
+            if record.state == "sold":
+                raise UserError(("Canceled property cannot be sold."))
+            record.state = "canceled"
+        return True

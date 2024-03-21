@@ -1,4 +1,5 @@
 from odoo import api, fields, models
+from odoo.exceptions import UserError
 
 class Property_Offer(models.Model):
     _name = "estate.property.offer"
@@ -26,3 +27,30 @@ class Property_Offer(models.Model):
                     record.validity = (record.date_deadline - record.create_date.date()).days
                 else:
                     record.validity = (record.date_deadline - fields.Date.today()).days
+    
+    def action_accept(self):
+        for record in self:
+            if record.property_id.buyer_id:
+                raise UserError(("Only 1 offer can be Accepted."))
+                return True
+            record.status = "accepted"
+            record.property_id.selling_price = record.price
+            record.property_id.buyer_id = record.buyer_id
+            # 1. when it's triggered, we should know if there is offer accepted -> raise error if there is
+        return True
+    
+    def action_refuse(self):
+        for record in self:
+            if record.status == "accepted":
+                record.property_id.selling_price = 0
+                record.property_id.buyer_id = False
+            record.status = "refused"
+        return True
+    
+    def action_cancel(self):
+        for record in self:
+            if record.status == "accepted":
+                record.property_id.selling_price = 0
+                record.property_id.buyer_id = False
+            record.status = ""
+        return True
