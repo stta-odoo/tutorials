@@ -6,6 +6,7 @@ class Property(models.Model):
 
     _name = "estate.property"
     _description = "Properties of an estate"
+    _order = "id desc"
     name = fields.Char(string="Title", required=True)
     description = fields.Text()
     postcode = fields.Char()
@@ -27,7 +28,7 @@ class Property(models.Model):
         required = True,
         default = "new",
         copy = False,
-        string = "Satatus",
+        string = "Status",
     )
 
     property_type_id = fields.Many2one("estate.property.type", string="Property Type")

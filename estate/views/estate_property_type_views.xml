@@ -11,7 +11,7 @@
                         <field name="name"></field>
                     </div>
                     <notebook>
-                        <page>
+                        <page string="Description">
                             <field name="property_ids">
                                 <tree>
                                     <field name="name"/>
