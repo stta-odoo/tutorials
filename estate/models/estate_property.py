@@ -89,4 +89,3 @@ class Property(models.Model):
         for record in self:
             if not float_utils.float_is_zero(record.selling_price, _precision_rounding) and float_utils.float_compare(record.selling_price, 0.9*record.expected_price, _precision_rounding) == -1:
                 raise ValidationError("Selling price cannot be lower than 0.9x of the expected price") 
-   

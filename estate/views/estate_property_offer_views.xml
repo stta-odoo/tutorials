@@ -23,15 +23,15 @@
         <field name="name">estate.property.offer.tree</field>
         <field name="model">estate.property.offer</field>
         <field name="arch" type="xml">
-            <tree string="Test">
-                <field name="price"></field>
-                <field name="buyer_id"></field>
-                <field name="validity"></field>
-                <button name="action_accept" type="object" icon="fa-check"/>
-                <button name="action_refuse" type="object" icon="fa-times"/>
+            <tree string="Test" >
+                <field name="price"/>
+                <field name="buyer_id"/>
+                <field name="validity"/>
+                <button name="action_accept" type="object" icon="fa-check" invisible="status != False"/>
+                <button name="action_refuse" type="object" icon="fa-times" invisible="status != False"/>
                 <button name="action_cancel" type="object" icon="fa-undo"/>
-                <field name="status"></field>
-                <field name="date_deadline"></field>
+                <field name="status"/>
+                <field name="date_deadline"/>
             </tree>
         </field>
     </record>
