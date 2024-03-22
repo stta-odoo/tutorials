@@ -17,6 +17,7 @@
                 <!-- <field name="facades"/> -->
                 <filter string="Available" name="available_properties" domain="['|',('state','=','Offer Received'),('state','=','New')]"/>
                 <filter string="Postcode" name="group_postcode" context="{'group_by':'postcode'}"/>
+
                 <!-- <filter string="test_filter" name="test_filter" domain="['&amp;', ('expected_price','&lt;=', 10000), ('living_area', '>', 100)]"/> -->
             </search> 
         </field>
@@ -104,5 +105,6 @@
         <field name="name">Properties</field>
         <field name="res_model">estate.property</field>
         <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_available_properties': True}</field>
     </record>
 </odoo>
