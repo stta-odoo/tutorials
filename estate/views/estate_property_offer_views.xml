@@ -34,7 +34,16 @@
                 <button name="action_cancel" type="object" icon="fa-undo"/>
                 <field name="status" optional="true"/>
                 <field name="date_deadline"/>
+                <field name="property_id" optional="true"/> 
+                <field name="property_type_id" optional="true"/>
             </tree>
         </field>
+    </record>
+
+    <record id="estate_property_offer_from_property_type_action" model="ir.actions.act_window">
+        <field name="name">Property Offer</field>
+        <field name="res_model">estate.property.offer</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('property_type_id', '=', active_id)]</field>
     </record>
 </odoo>

@@ -6,6 +6,14 @@
         <field name="model">estate.property.type</field>
         <field name="arch" type="xml">
             <form string="Estate Property Type Form">
+                <header>
+                    <button class="oe_stat_button" 
+                            name="%(estate_property_offer_from_property_type_action)d"  
+                            type="action" 
+                            icon="fa-bars">
+                        <field string="Offers" name="offer_count" widget="statinfo"/>
+                    </button>
+                </header>
                 <sheet>
                     <div class="h1">
                         <field name="name"></field>
