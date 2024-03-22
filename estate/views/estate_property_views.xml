@@ -39,7 +39,7 @@
                     <group>
                         <field name="property_tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                         <group>
-                            <!-- <field name="state"></field> -->
+                            <field name="state"></field>
                             <field name="property_type_id" options="{'no_create': true}"></field>
                             <field name="postcode"></field>
                             <field name="date_availability"></field>                        
@@ -84,13 +84,17 @@
         <field name="name">estate.property.tree</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <tree string="Test">
+            <tree string="Test"
+            decoration-success="state == 'offer_received' or state == 'offer_accepted'"
+            decoration-bf="state == 'offer_accepted'"
+            decoration-muted="state == 'sold'">
                 <field name="name"/>
                 <field name="postcode"/>
                 <field name="bedrooms"/>
                 <field name="living_area"/>
                 <field name="expected_price"/>
                 <field name="selling_price"/>
+                <field name="state"/>
                 <field name="date_availability" optional='true'/>
             </tree>
         </field>

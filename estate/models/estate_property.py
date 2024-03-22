@@ -24,7 +24,7 @@ class Property(models.Model):
     )
     active = fields.Boolean(default=True)
     state = fields.Selection(
-        selection = [("new","New"), ("offer_received","Offer Received"), ("offer_cccepted","Offer Accepted"), ("sold","Sold"), ("canceled","Canceled")],
+        selection = [("new","New"), ("offer_received","Offer Received"), ("offer_accepted","Offer Accepted"), ("sold","Sold"), ("canceled","Canceled")],
         required = True,
         default = "new",
         copy = False,
