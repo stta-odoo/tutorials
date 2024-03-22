@@ -31,7 +31,7 @@
                 <header>
                     <button name="action_sold_click" type="object" string="SOLD"/>
                     <button name="action_cancel_click" type="object" string="CANCEL"/>
-                    <field name="state" widget="statusbar" statusbar_visible="new,offer_received,offer_cccepted,sold"/>
+                    <field name="state" widget="statusbar" statusbar_visible="new,offer_received,offer_accepted,sold"/>
                 </header>
                 <sheet>
                     <div class="h1">

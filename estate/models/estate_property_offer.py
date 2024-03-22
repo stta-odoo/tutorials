@@ -1,5 +1,6 @@
 from odoo import api, fields, models
 from odoo.exceptions import UserError
+from odoo.tools import float_utils
 
 class Property_Offer(models.Model):
     _name = "estate.property.offer"
@@ -59,3 +60,15 @@ class Property_Offer(models.Model):
                 record.property_id.buyer_id = False
             record.status = ""
         return True
+    
+    @api.model
+    def create(self, vals):
+        property = self.env['estate.property'].browse(vals['property_id'])
+        _precision_rounding = self.env["decimal.precision"].precision_get("Account")
+        
+        _max_offer_price = max(offer.price for offer in property.offer_ids) if len(property.offer_ids) else 0
+        if float_utils.float_compare(vals["price"], _max_offer_price, _precision_rounding) == -1:
+            raise UserError("New offer price must be the highest offer price.")
+        property.state = 'offer_received'
+
+        return super().create(vals)
