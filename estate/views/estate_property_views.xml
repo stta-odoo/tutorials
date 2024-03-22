@@ -16,7 +16,7 @@
                 <field name="facades"/>
                 <field name="property_type_id"/>
                 <!-- <field name="facades"/> -->
-                <filter string="Available" name="available_properties" domain="['|',('state','=','Offer Received'),('state','=','New')]"/>
+                <filter string="Available" name="available_properties" domain="['|',('state','=','offer_received'),('state','=','new')]"/>
                 <filter string="Postcode" name="group_postcode" context="{'group_by':'postcode'}"/>
                 <!-- <filter string="test_filter" name="test_filter" domain="['&amp;', ('expected_price','&lt;=', 10000), ('living_area', '>', 100)]"/> -->
             </search> 
