@@ -105,7 +105,7 @@
         <field name="name">estate.property.kanban</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <kanban default_group_by="property_type_id" group_create='false'>
+            <kanban>
                 <field name="state"/>
                 <templates>
                     <t t-name="kanban-box">
