@@ -29,5 +29,3 @@ class Property(models.Model):
         self.env["account.move"].create(vals)
 
         return super().action_sold_click()
-    
-    # def _create_invoice(self):
