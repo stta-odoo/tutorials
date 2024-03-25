@@ -105,11 +105,20 @@
         <field name="name">estate.property.kanban</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <kanban>
+            <kanban default_group_by="property_type_id" group_create='false'>
+                <field name="state"/>
                 <templates>
                     <t t-name="kanban-box">
                         <div class="oe_kanban_global_click">
-                            <field name="name"/>
+                            <strong><field name="name"/></strong>
+                            <div>Expected Price: <field name="expected_price"/></div>
+                            <div t-if="record.state.raw_value == 'offer_received'">
+                                <div>Best Price: <field name="best_price"/></div>
+                            </div>
+                            <div t-if="record.state.raw_value == 'offer_accepted'">
+                                <span>Selling Price: <field name="selling_price"/></span>
+                            </div>
+                            <field name="property_tag_ids"/>
                         </div>
                     </t>
                 </templates>
