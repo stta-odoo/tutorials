@@ -42,7 +42,7 @@ class Property(models.Model):
 
     offer_ids = fields.One2many("estate.property.offer", "property_id", string="Offers")
 
-    total_area = fields.Integer(compute="_compute_total_area")
+    total_area = fields.Float(compute="_compute_total_area")
     best_price = fields.Float(compute="_compute_best_price")
     
     _sql_constraints = [

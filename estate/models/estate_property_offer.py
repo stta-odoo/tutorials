@@ -38,8 +38,8 @@ class Property_Offer(models.Model):
         for record in self:
             if record.property_id.buyer_id:
                 raise UserError(("Only 1 offer can be Accepted."))
-                return True
             record.status = "accepted"
+            record.property_id.state = "offer_accepted"
             record.property_id.selling_price = record.price
             record.property_id.buyer_id = record.buyer_id
             # 1. when it's triggered, we should know if there is offer accepted -> raise error if there is
@@ -51,6 +51,7 @@ class Property_Offer(models.Model):
                 record.property_id.selling_price = 0
                 record.property_id.buyer_id = False
             record.status = "refused"
+            record.property_id.state = "offer_received"
         return True
     
     def action_cancel(self):
@@ -59,6 +60,7 @@ class Property_Offer(models.Model):
                 record.property_id.selling_price = 0
                 record.property_id.buyer_id = False
             record.status = ""
+            record.property_id.state = "offer_received"
         return True
     
     @api.model

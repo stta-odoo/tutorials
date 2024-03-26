@@ -29,8 +29,8 @@
         <field name="arch" type="xml">
             <form string="Estate Property Form">
                 <header>
-                    <button name="action_sold_click" type="object" string="SOLD"/>
-                    <button name="action_cancel_click" type="object" string="CANCEL"/>
+                    <button name="action_sold_click" type="object" string="SOLD" invisible="state == 'sold'"/>
+                    <button name="action_cancel_click" type="object" string="CANCEL" invisible="state == 'canceled'"/>
                     <field name="state" widget="statusbar" statusbar_visible="new,offer_received,offer_accepted,sold"/>
                 </header>
                 <sheet>
@@ -105,7 +105,7 @@
         <field name="name">estate.property.kanban</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <kanban>
+            <kanban default_group_by="property_type_id" group_create='false'>
                 <field name="state"/>
                 <templates>
                     <t t-name="kanban-box">
@@ -113,7 +113,7 @@
                             <strong><field name="name"/></strong>
                             <div>Expected Price: <field name="expected_price"/></div>
                             <div t-if="record.state.raw_value == 'offer_received'">
-                                <div>Best Price: <field name="best_price"/></div>
+                                <group>Best Price: <field name="best_price" /></group>
                             </div>
                             <div t-if="record.state.raw_value == 'offer_accepted'">
                                 <span>Selling Price: <field name="selling_price"/></span>
