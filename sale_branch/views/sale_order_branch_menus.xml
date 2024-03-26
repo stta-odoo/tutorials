@@ -1,0 +1,4 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <menuitem name="Branches" id="sale_menu_config_activity_plan_1" action="sale_order_branch_action" parent="sale.menu_sale_config" sequence="80"/>
+</odoo>
